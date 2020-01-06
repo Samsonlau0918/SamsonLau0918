@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+    <html lang = "en">
+
+    <head>
+    <title>Testing Server Call </title> 
+    <script type = "text/javascript" src = "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script> 
+    <script type = "text/javascript" >
+   
+   $( document ).ready(function() {
+     
+    var key= localStorage.getItem("exist");
+     if(key==""){
+	    alert("pls login");
+		return;
+	 }else{
+	 
+	 }
+   
+   
+			$("#pressme").click(function(){
+     
+			$.ajax({
+            type: 'get',
+            url: 'https://mplpssl.wisx.io/nodered/getlampposts/',
+            dataType:"text",
+			data:"",
+			success: function(data) {
+			//alert(data);
+			//alert(data[0]);
+			var obj=JSON.parse(data);
+            alert(obj[0].name);
+			
+			if(data=="success"){
+			  localStorage.setItem("exist","1");
+			  location.href="/2ndpage";
+			
+			
+			
+			}else{
+			    alert("fail to login");
+				return;
+			}
+			
+			
+                console.log('yay');
+                console.log(data);              
+            },
+            error: function(xhr, status, error) {
+                console.log('Error: ' + error.message);
+            }
+        });
+       });
+ 
+ });
+</script> 
+</head>
+<body>
+    hi there
+	
+	<button id="pressme">Call server</button>
+<a href="/1234">Apple</a>
+</body>
+</html>
